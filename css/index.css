@@ -10,10 +10,10 @@
   box-sizing: border-box;
 }
 
-/* =================== ESTRUTURA APP (SEM ROLAGEM) =================== */
+/* =================== ESTRUTURA APP =================== */
 html, body {
   height: 100vh;
-  height: 100dvh; /* Altura real para mobile */
+  height: 100dvh;
   overflow: hidden; /* Trava a rolagem global */
 }
 
@@ -25,7 +25,7 @@ body {
   flex-direction: column;
 }
 
-/* =================== Cabeçalho =================== */
+/* =================== CABEÇALHO =================== */
 header {
   background-color: #141414;
   color: #fff;
@@ -42,7 +42,6 @@ header {
   height: auto;
 }
 
-/* Área do logo unificada para alinhamento perfeito */
 .logo-area {
   display: flex;
   align-items: center;
@@ -68,52 +67,6 @@ header h1, .logo-area h1 {
   object-fit: contain;
   margin: 0; 
   filter: drop-shadow(0 0 4px rgba(223, 166, 41, 0.4));
-}
-
-/* =================== Responsividade Mobile =================== */
-@media (max-width: 768px) {
-  header {
-    padding: 0.6rem 1rem;
-    flex-direction: column; /* Empilha os elementos em telas menores para centralizar */
-    gap: 12px;
-  }
-
-  .logo-area {
-    justify-content: center;
-    width: 100%;
-  }
-
-  header h1, .logo-area h1 {
-    font-size: 1.5rem; /* Tamanho ajustado para maior visibilidade */
-    gap: 8px;
-  }
-
-  .logo-icon {
-    width: 65px; /* Tamanho aumentado de 50px para 65px */
-    height: 65px; /* Tamanho aumentado de 50px para 65px */
-  }
-
-  header nav {
-    justify-content: center;
-    width: 100%;
-    gap: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  header h1, .logo-area h1 {
-    font-size: 1.3rem; /* Tamanho ajustado para maior visibilidade */
-    gap: 6px;
-  }
-
-  .logo-icon {
-    width: 55px; /* Tamanho aumentado de 40px para 55px */
-    height: 55px; /* Tamanho aumentado de 40px para 55px */
-  }
-
-  header nav a {
-    font-size: 0.8rem;
-  }
 }
 
 nav {
@@ -170,84 +123,102 @@ nav a:hover::after {
 
 /* =================== CONTEÚDO PRINCIPAL =================== */
 main {
-  flex: 1; /* Ocupa todo o espaço entre o header e o footer */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Garante que o conteúdo não force rolagem */
+  overflow: hidden; /* Remove barra de rolagem interna */
 }
 
-/* =================== BANNER E IMAGEM =================== */
+/* --- 1. CAIXINHA DE VIDRO EM CIMA --- */
+.banner-content {
+  position: relative;
+  color: white;
+  text-align: center;
+  z-index: 10;
+  padding: 14px 24px;
+  margin: 10px auto;
+  background: rgba(16, 15, 14, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(181, 140, 56, 0.4);
+  border-radius: 16px;
+  max-width: 580px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75),
+              0 0 12px rgba(223, 166, 41, 0.08);
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0; /* Impede a caixa de esticar/encolher demais */
+}
+
+.banner-content h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.3rem;
+  margin-bottom: 4px;
+  color: #dfa629;
+  text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.95),
+               0 0 8px rgba(223, 166, 41, 0.25);
+  line-height: 1.1;
+}
+
+.banner-content p {
+  font-size: 0.95rem;
+  color: #e6e6e6;
+  line-height: 1.3;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* --- 2. IMAGENS NO MEIO (PREENCHE O ESPAÇO RESTANTE) --- */
 .banner {
-  flex: 1;
+  flex: 1; /* Ocupa exatamente todo o espaço livre da tela */
   position: relative;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 0; /* Permite encolher dinamicamente sem estourar a tela */
   overflow: hidden;
-  /* Gradiente radial centralizado muito leve para criar um ponto de foco sem escurecer */
-  background: radial-gradient(circle at center, rgba(223, 166, 41, 0.05) 0%, transparent 65%),
-              linear-gradient(rgba(13, 13, 13, 0.35), rgba(13, 13, 13, 0.65));
+}
+
+.banner-slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .banner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   position: absolute;
   top: 0;
   left: 0;
-  /* Brilho aumentado para revelar mais detalhes da imagem de fundo */
-  filter: brightness(0.65) saturate(1.15) contrast(1.05);
-  z-index: 1;
-  transition: filter 0.5s ease;
+  filter: brightness(0.95) saturate(1.1);
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
-/* =================== BANNER CONTENT (Vidro suave e refinado) =================== */
-.banner-content {
-  position: relative;
-  color: white;
-  text-align: center;
-  z-index: 10;
-  padding: 42px 56px;
-  /* Fundo mais translúcido para integrar melhor com a imagem de fundo */
-  background: rgba(16, 15, 14, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(181, 140, 56, 0.4);
-  border-radius: 28px;
-  max-width: 65%;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75),
-              0 0 12px rgba(223, 166, 41, 0.08);
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+.banner-img.active {
+  opacity: 1;
+}
+
+/* --- 3. BOTÃO EMBAIXO --- */
+.banner-action {
+  padding: 12px;
+  background: rgba(16, 15, 14, 0.95);
+  border-top: 1px solid rgba(181, 140, 56, 0.3);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  flex-shrink: 0;
 }
 
-.banner-content h2 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 4.5rem;
-  margin-bottom: 18px;
-  color: #dfa629;
-  text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.95),
-               0 0 8px rgba(223, 166, 41, 0.25);
-  line-height: 1.15;
-  letter-spacing: 0.5px;
-}
-
-.banner-content p {
-  font-size: 1.3rem;
-  margin-bottom: 30px;
-  color: #e6e6e6;
-  line-height: 1.55;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-  max-width: 85%;
-}
-
-.banner-content button {
-  padding: 14px 38px;
-  font-size: 1.1rem;
+.banner-action button {
+  padding: 10px 30px;
+  font-size: 0.95rem;
   background: linear-gradient(135deg, #dfa629 0%, #b58c38 100%);
   color: #0d0d0d;
   border: none;
@@ -256,22 +227,16 @@ main {
   font-weight: bold;
   letter-spacing: 0.5px;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(223, 166, 41, 0.3),
-              0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(223, 166, 41, 0.3);
 }
 
-.banner-content button:hover {
+.banner-action button:hover {
   background: linear-gradient(135deg, #c48c22 0%, #946f1e 100%);
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 22px rgba(223, 166, 41, 0.45);
 }
 
-.banner-content button:active {
-  transform: translateY(1px) scale(0.99);
-  box-shadow: 0 4px 10px rgba(223, 166, 41, 0.25);
-}
-
-/* Animação Suave */
+/* Animação */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -283,52 +248,93 @@ main {
   }
 }
 
-/* =================== RESPONSIVIDADE =================== */
-@media (max-width: 768px) {
-  .banner-content {
-    max-width: 90%;
-    padding: 24px 18px;
-  }
-
-  .banner-content h2 {
-    font-size: 2.7rem;
-    margin-bottom: 12px;
-  }
-
-  .banner-content p {
-    font-size: 0.95rem;
-    margin-bottom: 18px;
-  }
-
-  .banner-content button {
-    padding: 10px 22px;
-    font-size: 0.88rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .banner-content h2 {
-    font-size: 2.3rem;
-  }
-}
 /* =================== FOOTER =================== */
 footer {
   background-color: #141414;
   color: #dfa629;
   text-align: center;
-  padding: 1.1rem;
-  font-size: 0.95rem;
+  padding: 0.8rem;
+  font-size: 0.9rem;
   border-top: 4px solid #b58c38;
-  flex-shrink: 0; /* Garante que o footer não suma */
+  flex-shrink: 0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.8);
 }
 
-/* =================== RESPONSIVIDADE =================== */
+/* =================== RESPONSIVIDADE (MOBILE) =================== */
 @media (max-width: 768px) {
+  header {
+    padding: 0.6rem 1rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .logo-area {
+    justify-content: center;
+    width: 100%;
+  }
+
+  header h1, .logo-area h1 {
+    font-size: 1.4rem;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 55px;
+    height: 55px;
+  }
 
   nav {
     gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
+  }
+
+  .banner-content {
+    margin: 8px auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+  }
+
+  .banner-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2px;
+  }
+
+  .banner-content p {
+    font-size: 0.82rem;
+  }
+
+  .banner-action {
+    padding: 8px;
+  }
+
+  .banner-action button {
+    padding: 8px 22px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1, .logo-area h1 {
+    font-size: 1.2rem;
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  header nav a {
+    font-size: 0.75rem;
+  }
+
+  .banner-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .banner-content p {
+    font-size: 0.78rem;
   }
 }
