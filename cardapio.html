@@ -40,6 +40,49 @@
       <h3 class="border-bottom pb-2 mb-4">🍕 Pizzas Salgadas</h3>
       <div class="grid d-flex flex-wrap justify-content-center gap-4">
 
+        <article class="item card-promocao border p-3 rounded shadow-sm text-center" data-categoria="combo">
+          <span class="card-badge">Ofertão</span>
+
+          <strong class="d-block h5">Desconto Realeza (15% OFF no Combo)</strong>
+          <p class="small text-muted mb-2"> Monte seu combo: Escolha 2 pizzas Grandes + 1 Refri 2L e ganhe 15% de desconto no valor total dos itens.</p>
+
+          <div class="opcoes-combo">
+            <!-- Seleção dos Sabores das Pizzas Grandes (IDs importantes para o JS) -->
+            <div class="text-start mb-2">
+              <label class="form-label small fw-bold">🍕 Pizza Grande 1:</label>
+              <select class="form-select select-pizza-sabor mb-2" id="pizza-combo1">
+                <option value="" disabled selected>Carregando sabores...</option>
+                <!-- Populado dinamicamente pelo JS -->
+              </select>
+
+              <label class="form-label small fw-bold">🍕 Pizza Grande 2:</label>
+              <select class="form-select select-pizza-sabor" id="pizza-combo2">
+                <option value="" disabled selected>Carregando sabores...</option>
+                <!-- Populado dinamicamente pelo JS -->
+              </select>
+            </div>
+
+            <!-- Seleção do Refrigerante (Preço Fixo ou Variável, ajustável no cardápio de bebidas) -->
+            <div class="text-start mb-3">
+              <label class="form-label small fw-bold">🥤 Refrigerante (2 Litros):</label>
+              <select class="form-select select-refri" id="refri-combo">
+                <option value="" disabled selected>Selecione o refrigerante</option>
+                <option value="Coca-Cola Tradicional">Coca-Cola (Tradicional)</option>
+                <option value="Coca-Cola Sem Açúcar">Coca-Cola Sem Açúcar</option>
+                <option value="Conquista Guaraná">Conquista Guaraná (Com Açúcar)</option>
+                <option value="Conquista Guaraná Zero">Conquista Guaraná (Sem Açúcar)</option>
+                <option value="Conquista Cola">Conquista Cola (Com Açúcar)</option>
+                <option value="Conquista Cola Zero">Conquista Cola (Sem Açúcar)</option>
+
+              </select>
+            </div>
+          </div>
+
+          <!-- Preço visual não é fixo, depende das escolhas. O botão chama a função específica -->
+          <button class="btn btn-primary btn-sm w-100" onclick="adicionarComboAoCarrinho()">Adicionar Combo com
+            Desconto</button>
+        </article>
+
         <article class="item card-meio-exclusivo border p-3 rounded shadow-sm text-center" style="width: 250px;"
           data-categoria="pizza">
 

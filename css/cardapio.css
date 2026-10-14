@@ -225,6 +225,128 @@ h3.border-bottom {
   margin-bottom: 25px !important;
 }
 
+/* =================== CSS Ajustado do Card de Combo (Compacto) =================== */
+
+.card-promocao {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border) !important;
+  border-radius: 8px !important;
+  padding: 0.8rem !important; /* Padding reduzido */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100% !important;
+  max-width: 250px !important; /* Largura reduzida para 250px */
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Badge (Ofertão) compacto */
+.card-promocao .card-badge {
+  background-color: var(--primary-color);
+  color: #0d0d0d;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 50px;
+  display: inline-block;
+  margin-bottom: 4px;
+  position: static;
+  align-self: center;
+}
+
+/* Título compacto */
+.card-promocao strong.h5 {
+  color: var(--primary-color) !important;
+  font-size: 1rem !important;
+  display: block;
+  margin-top: 0 !important;
+  margin-bottom: 0.3rem !important;
+}
+
+/* Descrição reduzida */
+.card-promocao p.small {
+  font-size: 0.72rem !important;
+  color: #aaa !important;
+  opacity: 0.9;
+  margin-top: 0 !important;
+  margin-bottom: 0.6rem !important;
+  line-height: 1.1 !important;
+}
+
+/* Container dos seletores compacto */
+.card-promocao .opcoes-combo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+  margin-bottom: 0.6rem;
+  text-align: left;
+  width: 100%;
+}
+
+/* Labels menores */
+.card-promocao label {
+  font-size: 0.62rem !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 1px !important;
+  display: block;
+  text-align: left;
+}
+
+/* Selects mais baixos e compactos */
+.card-promocao .form-select, 
+.card-promocao select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  
+  background-color: var(--input-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--card-border, #333) !important;
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+  height: 28px !important; /* Altura do campo reduzida para 28px */
+  padding: 0 24px 0 6px !important; 
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 8px center !important;
+  background-size: 10px 10px !important;
+}
+
+/* Botão mais compacto */
+.card-promocao button {
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-weight: 800;
+  color: #0d0d0d;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  min-height: 28px;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  margin-top: auto;
+  box-shadow: 0 3px 0px #ab7c1c;
+  box-sizing: border-box;
+}
+
+.card-promocao button:hover {
+  background-color: #c48c22;
+  transform: translateY(-2px);
+}
+
 /* =================== Seções e Bordas =================== */
 section.mb-5.border {
   background-color: var(--card-bg) !important;
