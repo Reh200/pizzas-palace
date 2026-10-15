@@ -319,7 +319,7 @@ function finalizarPedido() {
                 bordaTexto = `%0A${bordasCombo.join('%0A')}`;
             }
         } else if (item.borda && item.borda !== 'Nenhuma') {
-            bordaTexto = `%0ABorda: ${item.borda} - Aplicada para ${item.quantidade} unidade(s)`;
+            bordaTexto = `%0ABorda: ${item.borda} - Aplicada para ${item.quantidade} pizza(s)`;
         }
         message += `${item.quantidade}x ${item.nome}${bordaTexto}%0A`;
         message += `Subtotal: R$ ${sub.toFixed(2).replace('.', ',')}%0A%0A`;
